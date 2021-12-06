@@ -5,17 +5,17 @@
 }
 
 .danger {
-    background-color: red;
+    background-color: #e0463a;
 }
 
 .medium {
-    background-color: #1CB5E0;
+    background-color: #5ac4f2;
 }
 
 table {
   justify-content: space-between;
   margin: 0 auto;
-  width: 40%;
+  width: 60%;
   border-spacing: 0;
   box-shadow: 0 2px 15px grey;
   font-family: 'Lobster', cursive;
