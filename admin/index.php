@@ -10,24 +10,21 @@ include 'includes/navigation.php';
 //Delete Product
 if(isset($_GET['delete'])){
 	$id = sanitize($_GET['delete']);
-	$db->query("DELETE FROM tod WHERE id ='$id'");
-	$_SESSION['success_flash'] = 'Product successfuly deleted.';
+	$db->query("DELETE FROM todo WHERE id ='$id'");
 	header('Location: index.php');
 }
-$dbpath = '';
 
 
 if(isset($_GET['add']) || isset($_GET['edit'])){
 
 	$title = ((isset($_POST['title'])?$_POST['title']:''));
 	$text = ((isset($_POST['text'])?$_POST['text']:''));
-
-	$saved_image = '';
+	$priority = ((isset($_POST['priority'])?$_POST['priority']:''));
+	$deadline = ((isset($_POST['deadline'])?$_POST['deadline']:''));
 
 
 
 	if(isset($_GET['edit'])){
-		$variablesEdit = [];
 		$edit_id = (int)$_GET['edit'];
 		$productResults = $db->query("SELECT * FROM todo WHERE id = '$edit_id'");
 
@@ -35,20 +32,13 @@ if(isset($_GET['add']) || isset($_GET['edit'])){
 		
 		$title = ((isset($_POST['title'])?$_POST['title']:$product['title']));
 		$text = ((isset($_POST['text'])?$_POST['text']:$product['text']));
-
-		
-		
-	}
-   else {
-		$sizesArray = [];
+		$priority = ((isset($_POST['priority'])?$_POST['priority']:$product['priority']));
+		$deadline = ((isset($_POST['deadline'])?$_POST['deadline']:$product['deadline']));
 	}
 
 	if($_POST){
 		$errors = [];
 		$require = ['title','text'];
-		$allowed = ['png', 'jpg', 'jpeg', 'gif'];
-		$tmpLoc = [];
-		$uploadPath = [];
 		foreach ($require as $field) {
 			if($_POST[$field] == '') {
 				$errors[] = 'All Fields With and Astrisk are required.';
@@ -56,22 +46,20 @@ if(isset($_GET['add']) || isset($_GET['edit'])){
 			}
 		}
 
-
-		
 		if(!empty($errors)){
 			echo display_errors($errors);
 		} else {
-			$insertSql = "INSERT INTO todo(`title`, `text`, `position`) VALUES ('$title', '$text', null)";
+			$insertSql = "INSERT INTO todo(`title`, `text`, `position`, `priority`, `user_data`, `deadline`) VALUES ('$title', '$text', null, '$priority', '$user_id', '$deadline')";
 			
 			if(isset($_GET['edit'])){
-				$insertSql = "UPDATE todo SET title = '$title', text = '$text'  WHERE id = '$edit_id'";
+				$insertSql = "UPDATE todo SET title = '$title', text = '$text', priority = '$priority', user_data = '$user_id', deadline = '$deadline' WHERE id = '$edit_id'";
 			}
 			$db->query($insertSql);
 			header('Location: index.php');
 		}
 	}
 	?>
-	<h2 class="text-center"><?=((isset($_GET['edit']))?'Edit':'Add a New');?> Album</h2>
+	<h2 class="text-center"><?=((isset($_GET['edit']))?'Edit':'Add a New');?> ToDo</h2>
 	<form action="index.php?<?=((isset($_GET['edit']))?'edit=' . $edit_id :'add=1'); ?>" method="post" enctype="multipart/form-data">
 		<div class="form-group col-md-3">
 			<label for="title">Title*:</label>
@@ -79,10 +67,22 @@ if(isset($_GET['add']) || isset($_GET['edit'])){
 		</div>
 		
 	
-	<div class="form-group col-md-6">
+	<div class="form-group col-md-4">
 		
-			<label for="photo">Text</label>
+			<label for="text">Text</label>
 			<textarea rows="15" cols="50" id="text" name="text"><?=$text;?></textarea>
+	</div>
+	<div class="form-group col-md-2">
+			<label for="priority">Priority:</label>
+			<select class="form-control" name="priority"  id="priority">
+				<option value="low">low</option>
+				<option value="medium">medium</option>
+				<option value="hight">hight</option>
+			</select>
+		</div>
+		<div class="form-group col-md-2">
+			<label for="deadline">Deadline</label>
+		<input type="text" placeholder="10-12-2021 exp" name="deadline" class="form-control" id="deadline" value="<?=$deadline;?>">
 	</div>
 	<div class="form-group pull-right">
 		<a href="index.php" class="btn btn-default">Cancel</a>
@@ -93,7 +93,7 @@ if(isset($_GET['add']) || isset($_GET['edit'])){
 
 <?php
 } else {
-	$sql = "SELECT * FROM todo";
+	$sql = "SELECT id, title,text, position, priority, deadline  FROM todo WHERE user_data='$user_id' ORDER BY position";
 	$presults = $db->query($sql);
 	
 	?>
@@ -106,6 +106,8 @@ if(isset($_GET['add']) || isset($_GET['edit'])){
 			<th>Edit or Delete</th>
 			<th>Tasks</th>
 			<th>Text</th>
+			<th>Priority</th>
+			<th>Deadline</th>
 		</thead>
 		<tbody>
 			<?php while($todo = mysqli_fetch_assoc($presults)):
@@ -122,6 +124,8 @@ if(isset($_GET['add']) || isset($_GET['edit'])){
 						
 					</td>
 					<td><?php echo $todo['text'];?></td>
+					<td><?php echo $todo['priority'];?></td>
+					<td><?php echo $todo['deadline'];?></td>
 				</tr>
 
 			<?php endwhile; ?>

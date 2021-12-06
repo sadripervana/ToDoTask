@@ -3,7 +3,7 @@
 	<div class="container">
 		<a href="index.php" class="navbar-brand">TO DO APP</a>
 		<ul class="nav navbar-nav">
-			<li><a href="/PHPProjects/ToDoTask/admin/index.php">login</a></li>	
+			<li><a href="/PHPProjects/ToDoTask/admin/index.php">Login</a></li>
 		</ul>
 	</div>
 </nav>

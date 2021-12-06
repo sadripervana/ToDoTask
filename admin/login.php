@@ -10,7 +10,6 @@ $errors = [];
 ?>
 <style>
 body{
-	
 	background-size: 100vh 100vh;
 	background-attachment: fixed;
 }
@@ -77,7 +76,7 @@ body{
 			<input type="submit" value="Login" class="btn btn-primary">
 		</div>
 	</form>
-	<p class="text-right"><a href="/PHPProjects/ImageGalery/index.php" alt="home">Visiti Site</a></p>
+	<p class="text-right"><a href="/PHPProjects/PHPeCommerce1/index.php" alt="home">Visiti Site</a></p>
 </div>
 
 <?php include 'includes/footer.php'; ?>

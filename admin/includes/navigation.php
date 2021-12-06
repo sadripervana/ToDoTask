@@ -4,7 +4,7 @@
 		<ul class="nav navbar-nav">
 
 			<!-- Menu Items-->
-			<li><a href="index.php">Albums</a></li>
+			<li><a href="index.php">TO DO</a></li>
 			<?php if(has_permission('admin')): ?>
 			<li><a href="users.php">Users</a></li>
 			<?php endif; ?>

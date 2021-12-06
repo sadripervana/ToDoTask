@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/PHPProjects/ImageGalery/core/init.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/PHPProjects/ToDoTask/core/init.php';
 if(!is_loged_in()){
 	login_error_redirect();
 }

@@ -46,4 +46,17 @@ function has_permission($permission = 'admin'){
 	}
 	return false;
 }
+
+function pretty_date($date){
+	return date("M d, Y h:i A", strtotime($date));
+}
+
+function issetParameter($post, $key, $returnValue = ''){
+		// $title = ((isset($_POST['title']) && $_POST['title'] != '')?sanitize($_POST['title']):'');
+	if(isset($post[$key]) && $post[$key] != ''){
+		return sanitize($post[$key]);
+	} else {
+		return $returnValue;
+	}
+}
 ?>
