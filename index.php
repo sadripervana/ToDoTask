@@ -4,6 +4,10 @@ require_once 'core/init.php';
 require_once("includes/header.php");
 include 'includes/navigation.php'; 
 
+if(!is_loged_in()){
+	login_error_redirect();
+}
+
 if (isset($_POST['update'])) {
 	foreach($_POST['positions'] as $position) {
 		$index = $position[0];
@@ -33,7 +37,7 @@ if (isset($_POST['update'])) {
 							while($data = $sql->fetch_array()) :?>
 								<tr data-index="<?=$data['id'];?>" data-position="<?=$data['position'];?>"
 									<?php 
-									if($data['priority'] == 'hight'){
+									if($data['priority'] == 'high'){
 										echo 'class="danger"';
 									} elseif ($data['priority'] == 'medium'){
 										echo 'class="medium"';

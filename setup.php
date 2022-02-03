@@ -25,12 +25,12 @@
  // Duke krijuar tabelen
     createTable($db,'`todo`',
     'id MEDIUMINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `title` varchar(250) NOT NULL,
-    `text` longtext NOT NULL,
-    `position` int DEFAULT NULL,
-    `priority` varchar(250) ,
-    `user_data` tinyint NOT NULL,
-    `deadline` text NOT NULL'
+      title varchar(250) NOT NULL,
+      text longtext NOT NULL,
+      position int DEFAULT NULL,
+      priority varchar(250) ,
+      user_data tinyint NOT NULL,
+      deadline text NOT NULL'
    );
 
     //Krijo tabelen users
@@ -60,14 +60,6 @@
 ";
 // Insertin data
  query($db, $sql);
-
-$sqli = "INSERT INTO `users` (`id`, `full_name`, `email`, `password`, `join_date`, `last_login`, `permissions`) VALUES
-(8, 'sadri pervana', 'sadripervana1@gmail.com', '$2y$10$C3ajJRcHhfmS9PtAePrVuuK.BUg1MbxSETL7HnqFfmkkK6pNCEy4C', '2021-11-28 16:18:46', '2021-12-06 16:15:53', 'admin,editor'),
-(10, 'Diu Diu', 'diudiu@gmail.com', '$2y$10$4//3814QVAkNMC1xcfwdSeDkCHVXLpsdDPP/.qV39eDfohvbYWUA6', '2021-12-06 15:24:32', '2021-12-06 15:45:36', 'editor'),
-(11, 'test test', 'test1@gmail.com', '$2y$10$tANDCVDvcvfaCcPqNnND1e1nKkjHWCGQG9LgTnj3YqkjbizAFh/zK', '2021-12-06 15:48:57', '2021-12-06 15:49:06', 'editor')";
-var_dump($sqli);die;
-// insertin admin data
-query($db, $sqli);
     ?>
   </body>
 </html>

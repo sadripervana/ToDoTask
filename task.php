@@ -7,8 +7,6 @@ if (isset($_GET['edit'])) {
 if(isset($_POST['textarea'])){
     $text = $_POST['textarea'];
     $db->query("UPDATE  todo SET text='$text' WHERE id = '$id'");
-
-
     header('Location: index.php');
 }
 if(isset($_GET['delete'])){
