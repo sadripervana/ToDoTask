@@ -7,7 +7,7 @@ if(!is_loged_in()){
 include 'includes/head.php';
 include 'includes/navigation.php';
 
-//Delete Product
+//Delete todo
 if(isset($_GET['delete'])){
 	$id = sanitize($_GET['delete']);
 	$db->query("DELETE FROM todo WHERE id ='$id'");
@@ -26,14 +26,14 @@ if(isset($_GET['add']) || isset($_GET['edit'])){
 
 	if(isset($_GET['edit'])){
 		$edit_id = (int)$_GET['edit'];
-		$productResults = $db->query("SELECT * FROM todo WHERE id = '$edit_id'");
+		$todoResults = $db->query("SELECT * FROM todo WHERE id = '$edit_id'");
 
-		$product = mysqli_fetch_assoc($productResults);
+		$todo = mysqli_fetch_assoc($todoResults);
 		
-		$title = ((isset($_POST['title'])?$_POST['title']:$product['title']));
-		$text = ((isset($_POST['text'])?$_POST['text']:$product['text']));
-		$priority = ((isset($_POST['priority'])?$_POST['priority']:$product['priority']));
-		$deadline = ((isset($_POST['deadline'])?$_POST['deadline']:$product['deadline']));
+		$title = ((isset($_POST['title'])?$_POST['title']:$todo['title']));
+		$text = ((isset($_POST['text'])?$_POST['text']:$todo['text']));
+		$priority = ((isset($_POST['priority'])?$_POST['priority']:$todo['priority']));
+		$deadline = ((isset($_POST['deadline'])?$_POST['deadline']:$todo['deadline']));
 	}
 
 	if($_POST){
@@ -77,7 +77,7 @@ if(isset($_GET['add']) || isset($_GET['edit'])){
 			<select class="form-control" name="priority"  id="priority">
 				<option value="low">low</option>
 				<option value="medium">medium</option>
-				<option value="hight">hight</option>
+				<option value="high">high</option>
 			</select>
 		</div>
 		<div class="form-group col-md-2">
